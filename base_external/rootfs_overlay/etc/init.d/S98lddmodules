@@ -2,18 +2,16 @@
 
 case "$1" in
     start)
-       echo "Loading ldd kernel modules"
+       echo "Loading ads1115 kernel module"
        cd /usr/bin/
-       scull_load
-       module_load faulty
-       insmod hello.ko
+       modprobe i2c-bcm2835
+       modprobe i2c-dev
+       ads1115_load
        ;;
     stop)
-       echo "Unloading ldd kernel modules"
+       echo "Unloading ads1115 kernel module"
        cd /usr/bin/
-       scull_unload
-       module_unload faulty
-       rmmod hello
+       ads1115_unload
        ;;
     *)
        echo "Usage: $0 {start|stop}"
